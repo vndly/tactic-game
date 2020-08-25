@@ -1,19 +1,22 @@
 import 'dart:math';
-import 'package:cards_game/models/match_map.dart';
-import 'package:cards_game/unit.dart';
-import 'package:cards_game/unit_type.dart';
+import 'package:cards_game/models/battlefield.dart';
+import 'package:cards_game/models/player.dart';
+import 'package:cards_game/models/unit.dart';
+import 'package:cards_game/models/unit_type.dart';
 import 'package:cards_game/widgets/command_center.dart';
 import 'package:cards_game/widgets/grid.dart';
 import 'package:flutter/material.dart';
 
 class MatchScreen extends StatefulWidget {
+  final Battlefield battlefield;
+
+  const MatchScreen({@required this.battlefield});
+
   @override
   _MatchScreenState createState() => _MatchScreenState();
 }
 
 class _MatchScreenState extends State<MatchScreen> {
-  final MatchMap map = MatchMap(6, 8);
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,19 +26,19 @@ class _MatchScreenState extends State<MatchScreen> {
           builder: (context, constaints) => Column(
             children: [
               CommandCenter(
-                player: 2,
-                color: Colors.red,
+                player: widget.battlefield.players[1],
                 height: (constaints.maxHeight -
-                        ((constaints.maxWidth / map.width) * map.height)) /
+                        ((constaints.maxWidth / widget.battlefield.width) *
+                            widget.battlefield.height)) /
                     2,
                 onTap: _onCommandCenterTapped,
               ),
-              Expanded(child: Grid(map: map)),
+              Expanded(child: Grid(battlefield: widget.battlefield)),
               CommandCenter(
-                player: 1,
-                color: Colors.blue,
+                player: widget.battlefield.players[0],
                 height: (constaints.maxHeight -
-                        ((constaints.maxWidth / map.width) * map.height)) /
+                        ((constaints.maxWidth / widget.battlefield.width) *
+                            widget.battlefield.height)) /
                     2,
                 onTap: _onCommandCenterTapped,
               ),
@@ -46,13 +49,12 @@ class _MatchScreenState extends State<MatchScreen> {
     );
   }
 
-  void _onCommandCenterTapped(int player) {
+  void _onCommandCenterTapped(Player player) {
     setState(() {
-      map.addUnit(
-        player,
+      player.addUnit(
         Unit(
-          x: Random().nextInt(map.width),
-          y: Random().nextInt(map.height),
+          x: Random().nextInt(widget.battlefield.width),
+          y: Random().nextInt(widget.battlefield.height),
           player: player,
           type: UnitType.circle,
         ),

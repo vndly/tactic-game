@@ -1,10 +1,11 @@
-import 'package:cards_game/unit_type.dart';
+import 'package:cards_game/models/player.dart';
+import 'package:cards_game/models/unit_type.dart';
 import 'package:flutter/foundation.dart';
 
 class Unit {
   final int x;
   final int y;
-  final int player;
+  final Player player;
   final UnitType type;
 
   const Unit({

@@ -1,5 +1,5 @@
-import 'package:cards_game/models/match_map.dart';
-import 'package:cards_game/unit.dart';
+import 'package:cards_game/models/battlefield.dart';
+import 'package:cards_game/models/unit.dart';
 import 'package:flutter/material.dart';
 
 class Cell extends StatelessWidget {
@@ -7,19 +7,19 @@ class Cell extends StatelessWidget {
   final int y;
   final double width;
   final double height;
-  final MatchMap map;
+  final Battlefield battlefield;
 
   const Cell({
     @required this.x,
     @required this.y,
     @required this.width,
     @required this.height,
-    @required this.map,
+    @required this.battlefield,
   });
 
   @override
   Widget build(BuildContext context) {
-    final Unit unit = map.unit(x, y);
+    final Unit unit = battlefield.unit(x, y);
 
     return Container(
       width: width,
@@ -35,8 +35,9 @@ class Cell extends StatelessWidget {
               child: Text(
                 unit.type.toString(),
                 style: TextStyle(
-                    fontSize: 10,
-                    color: (unit.player == 1) ? Colors.blue : Colors.red),
+                  fontSize: 10,
+                  color: unit.player.color,
+                ),
               ),
             )
           : Container(),

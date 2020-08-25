@@ -1,27 +1,27 @@
-import 'package:cards_game/models/match_map.dart';
+import 'package:cards_game/models/battlefield.dart';
 import 'package:cards_game/widgets/cell.dart';
 import 'package:flutter/material.dart';
 
 class Grid extends StatelessWidget {
-  final MatchMap map;
+  final Battlefield battlefield;
 
-  const Grid({@required this.map});
+  const Grid({@required this.battlefield});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constaints) => Column(
         children: [
-          for (int i = 0; i < map.height; i++)
+          for (int i = 0; i < battlefield.height; i++)
             Row(
               children: [
-                for (int j = 0; j < map.width; j++)
+                for (int j = 0; j < battlefield.width; j++)
                   Cell(
                     x: j,
                     y: i,
-                    width: constaints.maxWidth / map.width,
-                    height: constaints.maxHeight / map.height,
-                    map: map,
+                    width: constaints.maxWidth / battlefield.width,
+                    height: constaints.maxHeight / battlefield.height,
+                    battlefield: battlefield,
                   ),
               ],
             ),

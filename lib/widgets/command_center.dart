@@ -1,14 +1,13 @@
+import 'package:cards_game/models/player.dart';
 import 'package:flutter/material.dart';
 
 class CommandCenter extends StatelessWidget {
-  final int player;
-  final Color color;
+  final Player player;
   final double height;
-  final Function(int) onTap;
+  final Function(Player) onTap;
 
   const CommandCenter({
     @required this.player,
-    @required this.color,
     @required this.height,
     @required this.onTap,
   });
@@ -18,14 +17,14 @@ class CommandCenter extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: height,
-      color: color,
+      color: player.color,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: () => onTap(player),
           child: Center(
             child: RotatedBox(
-              quarterTurns: (player == 1) ? 0 : 2,
+              quarterTurns: (player.id == 1) ? 0 : 2,
               child: Text(
                 'COMMAND  CENTER',
                 style: TextStyle(
