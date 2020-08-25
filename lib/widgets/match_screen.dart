@@ -119,6 +119,10 @@ class _MatchScreenState extends State<MatchScreen> {
   void _onPassturn(Player player) {
     setState(() {
       player.turnPassed = true;
+
+      if (widget.battlefield.allPlayersPassedTurn) {
+        widget.battlefield.passTurn();
+      }
     });
   }
 }
