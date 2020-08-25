@@ -1,4 +1,4 @@
-import 'package:cards_game/match_screen.dart';
+import 'package:cards_game/widgets/match_screen.dart';
 import 'package:flutter/material.dart';
 
 class CardsGameApp extends StatelessWidget {

@@ -1,7 +1,11 @@
 import 'package:cards_game/unit.dart';
 
 class MatchMap {
+  final int width;
+  final int height;
   final Map<int, List<Unit>> _units = {};
+
+  MatchMap(this.width, this.height);
 
   void addUnit(int player, Unit unit) {
     final List<Unit> list = _units[player];

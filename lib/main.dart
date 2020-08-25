@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cards_game/cards_game_app.dart';
+import 'package:cards_game/widgets/cards_game_app.dart';
 import 'package:flutter/services.dart';
 
 void main() {

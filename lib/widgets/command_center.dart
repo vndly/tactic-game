@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+
+class CommandCenter extends StatelessWidget {
+  final int player;
+  final Color color;
+  final double height;
+  final Function(int) onTap;
+
+  const CommandCenter({
+    @required this.player,
+    @required this.color,
+    @required this.height,
+    @required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: height,
+      color: color,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => onTap(player),
+          child: Center(
+            child: RotatedBox(
+              quarterTurns: (player == 1) ? 0 : 2,
+              child: Text(
+                'COMMAND  CENTER',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
