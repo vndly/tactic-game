@@ -109,7 +109,7 @@ class _MatchScreenState extends State<MatchScreen> {
           x: Random().nextInt(widget.battlefield.width),
           y: Random().nextInt(widget.battlefield.height),
           player: player,
-          type: UnitType.triangle,
+          type: UnitType.values[Random().nextInt(UnitType.values.length)],
           health: 10,
         ),
       );

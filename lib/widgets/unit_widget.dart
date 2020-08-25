@@ -109,7 +109,8 @@ class BasePainter extends CustomPainter {
       canvas,
       Offset(
         (size.width - tp.width) * 0.5,
-        (size.height - tp.height) * 0.65,
+        (size.height - tp.height) *
+            ((unit.type == UnitType.triangle) ? 0.65 : 0.5),
       ),
     );
   }
