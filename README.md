@@ -1,2 +1,1 @@
-# tactic-game
-Tactic game
+# Tactic game
