@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CommandCenter extends StatelessWidget {
   final Player player;
   final double height;
-  final Function(Player) onTap;
+  final Function(BuildContext, Player) onTap;
 
   const CommandCenter({
     @required this.player,
@@ -21,7 +21,7 @@ class CommandCenter extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () => onTap(player),
+          onTap: player.turnPassed ? null : () => onTap(context, player),
           child: Center(
             child: RotatedBox(
               quarterTurns: player.quarterTurns,

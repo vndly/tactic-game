@@ -8,6 +8,7 @@ class Player {
   final List<Unit> units = [];
   int commandPoints;
   int health;
+  bool turnPassed = false;
 
   Player({
     @required this.id,

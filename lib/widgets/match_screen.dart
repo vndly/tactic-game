@@ -49,7 +49,60 @@ class _MatchScreenState extends State<MatchScreen> {
     );
   }
 
-  void _onCommandCenterTapped(Player player) {
+  void _onCommandCenterTapped(BuildContext context, Player player) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return RotatedBox(
+          quarterTurns: player.quarterTurns,
+          child: SimpleDialog(
+            title: Center(
+              child: Text(
+                'Player ${player.id}',
+                style: TextStyle(color: player.color),
+              ),
+            ),
+            children: [
+              SimpleDialogOption(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _onCreateUnit(player);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.add),
+                      SizedBox(width: 10),
+                      const Text('Crate unit', style: TextStyle(fontSize: 18)),
+                    ],
+                  ),
+                ),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _onPassturn(player);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Row(
+                    children: [
+                      Icon(Icons.fast_forward),
+                      SizedBox(width: 10),
+                      const Text('Pass turn', style: TextStyle(fontSize: 18)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _onCreateUnit(Player player) {
     setState(() {
       player.addUnit(
         Unit(
@@ -60,6 +113,12 @@ class _MatchScreenState extends State<MatchScreen> {
           health: 10,
         ),
       );
+    });
+  }
+
+  void _onPassturn(Player player) {
+    setState(() {
+      player.turnPassed = true;
     });
   }
 }
