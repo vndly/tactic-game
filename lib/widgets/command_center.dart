@@ -26,7 +26,7 @@ class CommandCenter extends StatelessWidget {
             child: RotatedBox(
               quarterTurns: player.quarterTurns,
               child: Text(
-                'COMMAND  CENTER',
+                'CP: ${player.commandPoints}   /   HEALTH: ${player.health}',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,

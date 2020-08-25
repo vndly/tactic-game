@@ -9,13 +9,11 @@ class UnitWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(5),
-        child: CustomPaint(
-          painter: _painter(unit),
-          child: Container(),
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: CustomPaint(
+        painter: _painter(unit),
+        child: Container(),
       ),
     );
   }

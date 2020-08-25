@@ -20,11 +20,13 @@ class CardsGameApp extends StatelessWidget {
     battlefield.addPlayer(Player(
       id: 1,
       color: Colors.blue,
+      commandPoints: 10,
       health: 100,
     ));
     battlefield.addPlayer(Player(
       id: 2,
       color: Colors.red,
+      commandPoints: 10,
       health: 100,
     ));
 
