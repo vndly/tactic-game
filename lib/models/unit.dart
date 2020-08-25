@@ -7,11 +7,13 @@ class Unit {
   final int y;
   final Player player;
   final UnitType type;
+  int health;
 
-  const Unit({
+  Unit({
     @required this.x,
     @required this.y,
     @required this.player,
     @required this.type,
+    @required this.health,
   });
 }

@@ -1,5 +1,6 @@
 import 'package:cards_game/models/battlefield.dart';
 import 'package:cards_game/models/unit.dart';
+import 'package:cards_game/widgets/unit_widget.dart';
 import 'package:flutter/material.dart';
 
 class Cell extends StatelessWidget {
@@ -31,14 +32,9 @@ class Cell extends StatelessWidget {
         ),
       ),
       child: (unit != null)
-          ? Center(
-              child: Text(
-                unit.type.toString(),
-                style: TextStyle(
-                  fontSize: 10,
-                  color: unit.player.color,
-                ),
-              ),
+          ? RotatedBox(
+              quarterTurns: unit.player.quarterTurns,
+              child: UnitWidget(unit: unit),
             )
           : Container(),
     );

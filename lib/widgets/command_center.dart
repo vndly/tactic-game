@@ -24,7 +24,7 @@ class CommandCenter extends StatelessWidget {
           onTap: () => onTap(player),
           child: Center(
             child: RotatedBox(
-              quarterTurns: (player.id == 1) ? 0 : 2,
+              quarterTurns: player.quarterTurns,
               child: Text(
                 'COMMAND  CENTER',
                 style: TextStyle(

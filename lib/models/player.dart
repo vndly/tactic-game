@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class Player {
   final int id;
   final Color color;
+  final int quarterTurns;
   final List<Unit> units = [];
   int health;
 
@@ -11,7 +12,7 @@ class Player {
     @required this.id,
     @required this.color,
     @required this.health,
-  });
+  }) : quarterTurns = (id == 1) ? 0 : 2;
 
   void addUnit(Unit unit) => units.add(unit);
 }
