@@ -41,14 +41,70 @@ class Unit {
 
   void move(int battlefieldHeight) {
     if (player.id == 1) {
-      y--;
+      y -= speed;
     } else if (player.id == 2) {
-      y++;
+      y += speed;
     }
   }
 
   void attack(List<Unit> units) {
-    // TODO(momo): implement
+    final List<Unit> inColumn = units.where((u) => u.x == x).toList();
+
+    final List<Unit> inRange = _inRange(inColumn);
+
+    if (inRange.isNotEmpty) {
+      inRange.sort((u1, u2) => (u1.y - y).abs() - (u2.y - y).abs());
+      final Unit unitToAttack = inRange[0];
+      final int damage = _damateTo(unitToAttack);
+      unitToAttack.health -= damage;
+    }
+  }
+
+  int _damateTo(Unit unit) {
+    if (type == UnitType.circle) {
+      switch (unit.type) {
+        case UnitType.circle:
+          return 2;
+        case UnitType.triangle:
+          return 3;
+        case UnitType.square:
+          return 1;
+      }
+    } else if (type == UnitType.triangle) {
+      switch (unit.type) {
+        case UnitType.circle:
+          return 1;
+        case UnitType.triangle:
+          return 2;
+        case UnitType.square:
+          return 3;
+      }
+    } else if (type == UnitType.square) {
+      switch (unit.type) {
+        case UnitType.circle:
+          return 3;
+        case UnitType.triangle:
+          return 1;
+        case UnitType.square:
+          return 2;
+      }
+    }
+
+    return 0;
+  }
+
+  List<Unit> _inRange(List<Unit> inColumn) {
+    if (player.id == 1) {
+      return inColumn
+          .where((u) => (u.y <= y) && (u.y - y).abs() <= range)
+          .toList();
+    } else if (player.id == 2) {
+      return inColumn
+          .where((u) => (u.y >= y) && (u.y - y).abs() <= range)
+          .toList();
+    } else {
+      return [];
+    }
   }
 
   int damageToCommandCenter(int battlefieldHeight) {
