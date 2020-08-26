@@ -4,13 +4,19 @@ import 'package:flutter/material.dart';
 
 class UnitWidget extends StatelessWidget {
   final Unit unit;
+  final bool showHealth;
+  final double padding;
 
-  UnitWidget({@required this.unit});
+  UnitWidget({
+    @required this.unit,
+    this.showHealth = true,
+    this.padding = 10,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(padding),
       child: CustomPaint(
         painter: _painter(unit),
         child: Container(),
@@ -21,13 +27,13 @@ class UnitWidget extends StatelessWidget {
   CustomPainter _painter(Unit unit) {
     switch (unit.type) {
       case UnitType.circle:
-        return CirclePainter(unit: unit);
+        return CirclePainter(unit: unit, showHealth: showHealth);
 
       case UnitType.triangle:
-        return TrianglePainter(unit: unit);
+        return TrianglePainter(unit: unit, showHealth: showHealth);
 
       case UnitType.square:
-        return SquarePainter(unit: unit);
+        return SquarePainter(unit: unit, showHealth: showHealth);
 
       default:
         return null;
@@ -36,7 +42,8 @@ class UnitWidget extends StatelessWidget {
 }
 
 class CirclePainter extends BasePainter {
-  CirclePainter({@required Unit unit}) : super(unit: unit);
+  CirclePainter({@required Unit unit, @required bool showHealth})
+      : super(unit: unit, showHealth: showHealth);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -50,7 +57,8 @@ class CirclePainter extends BasePainter {
 }
 
 class TrianglePainter extends BasePainter {
-  TrianglePainter({@required Unit unit}) : super(unit: unit);
+  TrianglePainter({@required Unit unit, @required bool showHealth})
+      : super(unit: unit, showHealth: showHealth);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -71,7 +79,8 @@ class TrianglePainter extends BasePainter {
 }
 
 class SquarePainter extends BasePainter {
-  SquarePainter({@required Unit unit}) : super(unit: unit);
+  SquarePainter({@required Unit unit, @required bool showHealth})
+      : super(unit: unit, showHealth: showHealth);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -88,31 +97,36 @@ class SquarePainter extends BasePainter {
 
 class BasePainter extends CustomPainter {
   final Unit unit;
+  final bool showHealth;
   final Paint painter;
 
-  BasePainter({@required this.unit})
-      : painter = Paint()..color = unit.player.color;
+  BasePainter({
+    @required this.unit,
+    @required this.showHealth,
+  }) : painter = Paint()..color = unit.player.color;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final TextSpan span = TextSpan(
-      style: TextStyle(color: Colors.white),
-      text: '${unit.health}',
-    );
-    final TextPainter tp = TextPainter(
-      text: span,
-      textAlign: TextAlign.center,
-      textDirection: TextDirection.ltr,
-    );
-    tp.layout();
-    tp.paint(
-      canvas,
-      Offset(
-        (size.width - tp.width) * 0.5,
-        (size.height - tp.height) *
-            ((unit.type == UnitType.triangle) ? 0.65 : 0.5),
-      ),
-    );
+    if (showHealth) {
+      final TextSpan span = TextSpan(
+        style: TextStyle(color: Colors.white),
+        text: '${unit.health}',
+      );
+      final TextPainter tp = TextPainter(
+        text: span,
+        textAlign: TextAlign.center,
+        textDirection: TextDirection.ltr,
+      );
+      tp.layout();
+      tp.paint(
+        canvas,
+        Offset(
+          (size.width - tp.width) * 0.5,
+          (size.height - tp.height) *
+              ((unit.type == UnitType.triangle) ? 0.65 : 0.5),
+        ),
+      );
+    }
   }
 
   @override

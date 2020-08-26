@@ -17,7 +17,7 @@ class CommandCenter extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: height,
-      color: player.color,
+      color: (player.turnPassed) ? Colors.grey : player.color,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
