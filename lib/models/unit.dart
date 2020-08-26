@@ -112,14 +112,14 @@ class Unit {
     final int halfHeight = battlefieldHeight ~/ 2;
 
     if (player.id == 1) {
-      if (y == 0) {
+      if (y <= 0) {
         health = 0;
         return CONQUER_DAMAGE;
       } else if (y < halfHeight) {
         return halfHeight - y;
       }
     } else if (player.id == 2) {
-      if (y == (battlefieldHeight - 1)) {
+      if (y >= (battlefieldHeight - 1)) {
         health = 0;
         return CONQUER_DAMAGE;
       } else if (y > (halfHeight - 1)) {
