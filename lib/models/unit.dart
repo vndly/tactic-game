@@ -14,6 +14,7 @@ class Unit {
   static int DEFAULT_HEALTH = 10;
   static int DEFAULT_RANGE = 1;
   static int DEFAULT_SPEED = 1;
+  static int CONQUER_DAMAGE = 10;
 
   Unit({
     @required this.x,
@@ -111,11 +112,17 @@ class Unit {
     final int halfHeight = battlefieldHeight ~/ 2;
 
     if (player.id == 1) {
-      if (y < halfHeight) {
+      if (y == 0) {
+        health = 0;
+        return CONQUER_DAMAGE;
+      } else if (y < halfHeight) {
         return halfHeight - y;
       }
     } else if (player.id == 2) {
-      if (y > (halfHeight - 1)) {
+      if (y == (battlefieldHeight - 1)) {
+        health = 0;
+        return CONQUER_DAMAGE;
+      } else if (y > (halfHeight - 1)) {
         return y - halfHeight + 1;
       }
     }

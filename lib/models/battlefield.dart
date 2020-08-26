@@ -54,10 +54,6 @@ class Battlefield {
     }
 
     for (final Player player in players) {
-      player.clearUnits();
-    }
-
-    for (final Player player in players) {
       int damage = 0;
 
       for (final Unit unit in player.units) {
@@ -69,6 +65,10 @@ class Battlefield {
       } else if (player.id == 2) {
         players[0].health -= damage;
       }
+    }
+
+    for (final Player player in players) {
+      player.clearUnits();
     }
 
     if ((players[0].health > 0) && (players[1].health < 0)) {
@@ -86,6 +86,8 @@ class Battlefield {
     for (final Player player in players) {
       player.commandPoints = lastTurnCp + 1;
     }
+
+    lastTurnCp = players[0].commandPoints;
   }
 
   Unit unit(int x, int y) {
