@@ -21,12 +21,14 @@ class CommandCenter extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: player.turnPassed ? null : () => onTap(context, player),
+          onTap: (player.turnPassed || player.status != Status.playing)
+              ? null
+              : () => onTap(context, player),
           child: Center(
             child: RotatedBox(
               quarterTurns: player.quarterTurns,
               child: Text(
-                'CP: ${player.commandPoints}   /   HEALTH: ${player.health}',
+                text(player),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -38,5 +40,18 @@ class CommandCenter extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String text(Player player) {
+    switch (player.status) {
+      case Status.playing:
+        return 'CP: ${player.commandPoints}   /   HEALTH: ${player.health}';
+      case Status.winner:
+        return 'WINNER';
+      case Status.loser:
+        return 'LOSER';
+      default:
+        return '';
+    }
   }
 }

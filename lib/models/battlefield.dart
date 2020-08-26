@@ -37,22 +37,23 @@ class Battlefield {
   }
 
   void passTurn() {
+    // TODO(momo): move units
+    // TODO(momo): fight
+
+    if ((players[0].health > 0) && (players[1].health < 0)) {
+      players[0].status = Status.winner;
+      players[1].status = Status.loser;
+    } else if ((players[0].health < 0) && (players[1].health > 0)) {
+      players[1].status = Status.winner;
+      players[0].status = Status.loser;
+    }
+
     for (final Player player in players) {
       player.turnPassed = false;
     }
 
-    // TODO(momo): move units
-    // TODO(momo): fight
-
-    for (final Player player in players) {
-      if (player.health == 0) {
-        // TODO(momo): player lost
-      }
-    }
-
     for (final Player player in players) {
       player.commandPoints = lastTurnCp + 1;
-      // TODO(momo): increase cp
     }
   }
 

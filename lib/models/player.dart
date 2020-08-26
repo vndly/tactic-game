@@ -9,6 +9,7 @@ class Player {
   int commandPoints;
   int health;
   bool turnPassed = false;
+  Status status = Status.playing;
 
   static int INITIAL_CP = 10;
   static int INITIAL_HEALTH = 100;
@@ -25,4 +26,10 @@ class Player {
     commandPoints -= unit.cost;
     turnPassed = commandPoints == 0;
   }
+}
+
+enum Status {
+  playing,
+  winner,
+  loser,
 }
