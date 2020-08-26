@@ -10,6 +10,9 @@ class Player {
   int health;
   bool turnPassed = false;
 
+  static int INITIAL_CP = 10;
+  static int INITIAL_HEALTH = 100;
+
   Player({
     @required this.id,
     @required this.color,
@@ -17,5 +20,9 @@ class Player {
     @required this.health,
   }) : quarterTurns = (id == 1) ? 0 : 2;
 
-  void addUnit(Unit unit) => units.add(unit);
+  void addUnit(Unit unit) {
+    units.add(unit);
+    commandPoints -= unit.cost;
+    turnPassed = commandPoints == 0;
+  }
 }

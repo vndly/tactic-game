@@ -9,6 +9,7 @@ class Cell extends StatelessWidget {
   final double width;
   final double height;
   final Battlefield battlefield;
+  final Function onTap;
 
   const Cell({
     @required this.x,
@@ -16,6 +17,7 @@ class Cell extends StatelessWidget {
     @required this.width,
     @required this.height,
     @required this.battlefield,
+    @required this.onTap,
   });
 
   @override
@@ -36,7 +38,13 @@ class Cell extends StatelessWidget {
               quarterTurns: unit.player.quarterTurns,
               child: UnitWidget(unit: unit),
             )
-          : Container(),
+          : Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () => onTap?.call(),
+                child: Container(),
+              ),
+            ),
     );
   }
 }

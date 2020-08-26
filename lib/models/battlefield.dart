@@ -5,10 +5,14 @@ class Battlefield {
   final int width;
   final int height;
   final List<Player> players = [];
+  int lastTurnCp = 0;
 
   Battlefield(this.width, this.height);
 
-  void addPlayer(Player player) => players.add(player);
+  void addPlayer(Player player) {
+    players.add(player);
+    lastTurnCp = player.commandPoints;
+  }
 
   bool get allPlayersPassedTurn {
     for (final Player player in players) {
@@ -18,6 +22,18 @@ class Battlefield {
     }
 
     return true;
+  }
+
+  bool canCreateUnit(Unit unit) {
+    if ((unit.player.id == 1) && (unit.y == (height - 1))) {
+      return true;
+    }
+
+    if ((unit.player.id == 2) && (unit.y == 0)) {
+      return true;
+    }
+
+    return false;
   }
 
   void passTurn() {
@@ -35,7 +51,7 @@ class Battlefield {
     }
 
     for (final Player player in players) {
-      player.commandPoints++;
+      player.commandPoints = lastTurnCp + 1;
       // TODO(momo): increase cp
     }
   }

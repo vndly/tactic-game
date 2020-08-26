@@ -38,13 +38,15 @@ class Unit {
   int get cost => (health * 3 / 10).round() + range + speed;
 
   Unit of({
+    int x,
+    int y,
     int health,
     int range,
     int speed,
   }) =>
       Unit(
-        x: x,
-        y: y,
+        x: x ?? this.x,
+        y: y ?? this.y,
         player: player,
         type: type,
         health: health ?? this.health,

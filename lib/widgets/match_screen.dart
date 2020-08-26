@@ -18,6 +18,8 @@ class MatchScreen extends StatefulWidget {
 }
 
 class _MatchScreenState extends State<MatchScreen> {
+  Unit unitToPlace;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,7 +33,13 @@ class _MatchScreenState extends State<MatchScreen> {
                 height: _commandCenterHeight(constaints),
                 onTap: _onCommandCenterTapped,
               ),
-              Expanded(child: Grid(battlefield: widget.battlefield)),
+              Expanded(
+                child: Grid(
+                  battlefield: widget.battlefield,
+                  unitToPlace: unitToPlace,
+                  onUnitPlaced: _onCreateUnit,
+                ),
+              ),
               CommandCenter(
                 player: widget.battlefield.players[0],
                 height: _commandCenterHeight(constaints),
@@ -51,6 +59,10 @@ class _MatchScreenState extends State<MatchScreen> {
       2;
 
   void _onCommandCenterTapped(BuildContext context, Player player) {
+    setState(() {
+      unitToPlace = null;
+    });
+
     showDialog(
       context: context,
       builder: (context) {
@@ -197,19 +209,18 @@ class _MatchScreenState extends State<MatchScreen> {
     );
   }
 
-  void _onSelectStartCell(Unit unit) {}
-
-  void _onCreateUnit(Player player, Unit unit) {
+  void _onSelectStartCell(Unit unit) {
     setState(() {
-      player.addUnit(unit
-          /*Unit(
-          x: Random().nextInt(widget.battlefield.width),
-          y: Random().nextInt(widget.battlefield.height),
-          player: player,
-          type: UnitType.values[Random().nextInt(UnitType.values.length)],
-          health: 10,
-        ),*/
-          );
+      unitToPlace = unit;
+    });
+  }
+
+  void _onCreateUnit(Unit unit) {
+    setState(() {
+      if (widget.battlefield.canCreateUnit(unit)) {
+        unit.player.addUnit(unit);
+        unitToPlace = null;
+      }
     });
   }
 
