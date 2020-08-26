@@ -37,12 +37,18 @@ class Unit {
 
   int get cost => (health * 3 / 10).round() + range + speed;
 
+  bool get isAlive => health > 0;
+
   void move(int battlefieldHeight) {
     if (player.id == 1) {
       y--;
     } else if (player.id == 2) {
       y++;
     }
+  }
+
+  void attack(List<Unit> units) {
+    // TODO(momo): implement
   }
 
   int damageToCommandCenter(int battlefieldHeight) {

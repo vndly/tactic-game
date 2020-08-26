@@ -37,12 +37,24 @@ class Battlefield {
   }
 
   void passTurn() {
-    // TODO(momo): fight
-
     for (final Player player in players) {
       for (final Unit unit in player.units) {
         unit.move(height);
       }
+    }
+
+    for (final Player player in players) {
+      for (final Unit unit in player.units) {
+        if (player.id == 1) {
+          unit.attack(players[1].units);
+        } else if (player.id == 2) {
+          unit.attack(players[0].units);
+        }
+      }
+    }
+
+    for (final Player player in players) {
+      player.clearUnits();
     }
 
     for (final Player player in players) {
@@ -63,8 +75,8 @@ class Battlefield {
       players[0].status = Status.winner;
       players[1].status = Status.loser;
     } else if ((players[0].health < 0) && (players[1].health > 0)) {
-      players[1].status = Status.winner;
       players[0].status = Status.loser;
+      players[1].status = Status.winner;
     }
 
     for (final Player player in players) {

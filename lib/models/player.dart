@@ -25,6 +25,12 @@ class Player {
     units.add(unit);
     commandPoints -= unit.cost;
   }
+
+  void clearUnits() {
+    final List<Unit> alive = units.where((u) => u.isAlive).toList();
+    units.clear();
+    units.addAll(alive);
+  }
 }
 
 enum Status {
