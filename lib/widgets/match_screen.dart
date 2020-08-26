@@ -220,6 +220,10 @@ class _MatchScreenState extends State<MatchScreen> {
       if (widget.battlefield.canCreateUnit(unit)) {
         unit.player.addUnit(unit);
         unitToPlace = null;
+
+        if (unit.player.commandPoints == 0) {
+          _onPassturn(unit.player);
+        }
       }
     });
   }

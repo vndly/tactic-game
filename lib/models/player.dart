@@ -24,7 +24,6 @@ class Player {
   void addUnit(Unit unit) {
     units.add(unit);
     commandPoints -= unit.cost;
-    turnPassed = commandPoints == 0;
   }
 }
 

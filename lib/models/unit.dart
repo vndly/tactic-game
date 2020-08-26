@@ -3,12 +3,12 @@ import 'package:cards_game/models/unit_type.dart';
 import 'package:flutter/foundation.dart';
 
 class Unit {
-  final int x;
-  final int y;
   final Player player;
   final UnitType type;
   final int range;
   final int speed;
+  int x;
+  int y;
   int health;
 
   static int DEFAULT_HEALTH = 10;
@@ -36,6 +36,14 @@ class Unit {
       );
 
   int get cost => (health * 3 / 10).round() + range + speed;
+
+  void move(int battlefieldHeight) {
+    if (player.id == 1) {
+      y--;
+    } else if (player.id == 2) {
+      y++;
+    }
+  }
 
   Unit of({
     int x,
