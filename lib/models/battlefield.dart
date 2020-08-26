@@ -45,6 +45,20 @@ class Battlefield {
       }
     }
 
+    for (final Player player in players) {
+      int damage = 0;
+
+      for (final Unit unit in player.units) {
+        damage += unit.damageToCommandCenter(height);
+      }
+
+      if (player.id == 1) {
+        players[1].health -= damage;
+      } else if (player.id == 2) {
+        players[0].health -= damage;
+      }
+    }
+
     if ((players[0].health > 0) && (players[1].health < 0)) {
       players[0].status = Status.winner;
       players[1].status = Status.loser;

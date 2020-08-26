@@ -45,6 +45,22 @@ class Unit {
     }
   }
 
+  int damageToCommandCenter(int battlefieldHeight) {
+    final int halfHeight = battlefieldHeight ~/ 2;
+
+    if (player.id == 1) {
+      if (y < halfHeight) {
+        return halfHeight - y;
+      }
+    } else if (player.id == 2) {
+      if (y > (halfHeight - 1)) {
+        return y - halfHeight + 1;
+      }
+    }
+
+    return 0;
+  }
+
   Unit of({
     int x,
     int y,
