@@ -39,6 +39,7 @@ class _MatchScreenState extends State<MatchScreen> {
                   unitToPlace: unitToPlace,
                   onPlaceUnit: _onCreateUnit,
                   onRemoveUnit: _onRemoveUnit,
+                  onShowUnits: _onShowUnits,
                 ),
               ),
               CommandCenter(
@@ -241,6 +242,25 @@ class _MatchScreenState extends State<MatchScreen> {
     }
   }
 
+  void _onShowUnits(List<Unit> units) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Center(
+            child: Text('Units'),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              for (final Unit unit in units) UnitStatsRow(unit: unit),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   void _onPassturn(Player player) {
     setState(() {
       player.turnPassed = true;
@@ -277,6 +297,31 @@ class UnitRow extends StatelessWidget {
         showStats: false,
         padding: padding,
       ),
+    );
+  }
+}
+
+class UnitStatsRow extends StatelessWidget {
+  final Unit unit;
+
+  const UnitStatsRow({@required this.unit});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 50,
+          height: 50,
+          child: UnitWidget(
+            unit: unit,
+            showStats: false,
+            padding: 10,
+          ),
+        ),
+        Text(
+            'H: ${unit.health} | A: ${unit.attack} | R: ${unit.range} | S: ${unit.speed}'),
+      ],
     );
   }
 }

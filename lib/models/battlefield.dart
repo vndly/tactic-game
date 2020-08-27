@@ -90,15 +90,17 @@ class Battlefield {
     lastTurnCp++;
   }
 
-  Unit unit(int x, int y) {
+  List<Unit> units(int x, int y) {
+    final List<Unit> result = [];
+
     for (final Player player in players) {
       for (final Unit unit in player.units) {
         if ((unit.x == x) && (unit.y == y)) {
-          return unit;
+          result.add(unit);
         }
       }
     }
 
-    return null;
+    return result;
   }
 }

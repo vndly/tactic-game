@@ -8,12 +8,14 @@ class Grid extends StatelessWidget {
   final Unit unitToPlace;
   final Function(Unit) onPlaceUnit;
   final Function(Unit) onRemoveUnit;
+  final Function(List<Unit>) onShowUnits;
 
   const Grid({
     @required this.battlefield,
     @required this.unitToPlace,
     @required this.onPlaceUnit,
     @required this.onRemoveUnit,
+    @required this.onShowUnits,
   });
 
   @override
@@ -35,6 +37,7 @@ class Grid extends StatelessWidget {
                         ? () => onPlaceUnit(unitToPlace.of(x: j, y: i))
                         : null,
                     onRemoveUnit: onRemoveUnit,
+                    onShowUnits: onShowUnits,
                   ),
               ],
             ),
