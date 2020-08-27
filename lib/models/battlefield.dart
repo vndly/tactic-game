@@ -46,9 +46,9 @@ class Battlefield {
     for (final Player player in players) {
       for (final Unit unit in player.units) {
         if (player.id == 1) {
-          unit.attack(players[1].units);
+          unit.attackUnits(players[1].units);
         } else if (player.id == 2) {
-          unit.attack(players[0].units);
+          unit.attackUnits(players[0].units);
         }
       }
     }

@@ -2,7 +2,6 @@
 
 set -e
 
-FLAVOR="dev"
-#FLAVOR="prod"
+FLAVOR=$1
 
 flutter run -t lib/main/main_${FLAVOR}.dart

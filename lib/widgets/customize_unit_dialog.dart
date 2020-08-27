@@ -61,6 +61,18 @@ class _CustomizeUnitDialogState extends State<CustomizeUnitDialog> {
             },
           ),
           FieldEditor(
+            title: 'Attack',
+            value: widget.unit.attack,
+            step: 1,
+            min: Unit.DEFAULT_ATTACK,
+            max: 10,
+            onChange: (value) {
+              setState(() {
+                unit = unit.of(attack: value);
+              });
+            },
+          ),
+          FieldEditor(
             title: 'Range',
             value: widget.unit.range,
             min: Unit.DEFAULT_RANGE,
@@ -77,7 +89,7 @@ class _CustomizeUnitDialogState extends State<CustomizeUnitDialog> {
             value: widget.unit.speed,
             min: Unit.DEFAULT_SPEED,
             step: 1,
-            max: 3,
+            max: 2,
             onChange: (value) {
               setState(() {
                 unit = unit.of(speed: value);

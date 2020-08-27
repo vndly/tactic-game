@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 class Unit {
   final Player player;
   final UnitType type;
+  final int attack;
   final int range;
   final int speed;
   int x;
@@ -12,6 +13,7 @@ class Unit {
   int health;
 
   static int DEFAULT_HEALTH = 10;
+  static int DEFAULT_ATTACK = 1;
   static int DEFAULT_RANGE = 1;
   static int DEFAULT_SPEED = 1;
   static int CONQUER_DAMAGE = 10;
@@ -21,6 +23,7 @@ class Unit {
     @required this.y,
     @required this.player,
     @required this.type,
+    @required this.attack,
     @required this.range,
     @required this.speed,
     @required this.health,
@@ -31,12 +34,13 @@ class Unit {
         y: 0,
         player: player,
         type: type,
+        attack: DEFAULT_ATTACK,
         range: DEFAULT_RANGE,
         speed: DEFAULT_SPEED,
         health: DEFAULT_HEALTH,
       );
 
-  int get cost => (health * 3 / 10).round() + range + speed;
+  int get cost => (health / 5).round() + attack + range + speed;
 
   bool get isAlive => health > 0;
 
@@ -48,7 +52,7 @@ class Unit {
     }
   }
 
-  void attack(List<Unit> units) {
+  void attackUnits(List<Unit> units) {
     final List<Unit> inColumn = units.where((u) => u.x == x).toList();
 
     final List<Unit> inRange = _inRange(inColumn);
@@ -56,7 +60,7 @@ class Unit {
     if (inRange.isNotEmpty) {
       inRange.sort((u1, u2) => (u1.y - y).abs() - (u2.y - y).abs());
       final Unit unitToAttack = inRange[0];
-      final int damage = _damateTo(unitToAttack);
+      final int damage = _damateTo(unitToAttack) * attack;
       unitToAttack.health -= damage;
     }
   }
@@ -134,6 +138,7 @@ class Unit {
     int x,
     int y,
     int health,
+    int attack,
     int range,
     int speed,
   }) =>
@@ -143,6 +148,7 @@ class Unit {
         player: player,
         type: type,
         health: health ?? this.health,
+        attack: attack ?? this.attack,
         range: range ?? this.range,
         speed: speed ?? this.speed,
       );
