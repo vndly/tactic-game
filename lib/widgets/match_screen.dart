@@ -37,7 +37,8 @@ class _MatchScreenState extends State<MatchScreen> {
                 child: Grid(
                   battlefield: widget.battlefield,
                   unitToPlace: unitToPlace,
-                  onUnitPlaced: _onCreateUnit,
+                  onPlaceUnit: _onCreateUnit,
+                  onRemoveUnit: _onRemoveUnit,
                 ),
               ),
               CommandCenter(
@@ -226,6 +227,18 @@ class _MatchScreenState extends State<MatchScreen> {
         }
       }
     });
+  }
+
+  void _onRemoveUnit(Unit unit) {
+    if ((unit.player.id == 1) && (unit.y == (widget.battlefield.height - 1))) {
+      setState(() {
+        unit.player.removeUnit(unit);
+      });
+    } else if ((unit.player.id == 2) && (unit.y == 0)) {
+      setState(() {
+        unit.player.removeUnit(unit);
+      });
+    }
   }
 
   void _onPassturn(Player player) {

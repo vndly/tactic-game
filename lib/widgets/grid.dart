@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 class Grid extends StatelessWidget {
   final Battlefield battlefield;
   final Unit unitToPlace;
-  final Function(Unit) onUnitPlaced;
+  final Function(Unit) onPlaceUnit;
+  final Function(Unit) onRemoveUnit;
 
   const Grid({
     @required this.battlefield,
     @required this.unitToPlace,
-    @required this.onUnitPlaced,
+    @required this.onPlaceUnit,
+    @required this.onRemoveUnit,
   });
 
   @override
@@ -29,9 +31,10 @@ class Grid extends StatelessWidget {
                     width: constaints.maxWidth / battlefield.width,
                     height: constaints.maxHeight / battlefield.height,
                     battlefield: battlefield,
-                    onTap: (unitToPlace != null)
-                        ? () => onUnitPlaced(unitToPlace.of(x: j, y: i))
+                    onPlaceUnit: (unitToPlace != null)
+                        ? () => onPlaceUnit(unitToPlace.of(x: j, y: i))
                         : null,
+                    onRemoveUnit: onRemoveUnit,
                   ),
               ],
             ),

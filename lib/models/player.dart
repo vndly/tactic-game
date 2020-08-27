@@ -26,6 +26,11 @@ class Player {
     commandPoints -= unit.cost;
   }
 
+  void removeUnit(Unit unit) {
+    units.remove(unit);
+    commandPoints += unit.cost;
+  }
+
   void clearUnits() {
     final List<Unit> alive = units.where((u) => u.isAlive).toList();
     units.clear();

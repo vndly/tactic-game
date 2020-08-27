@@ -9,7 +9,8 @@ class Cell extends StatelessWidget {
   final double width;
   final double height;
   final Battlefield battlefield;
-  final Function onTap;
+  final Function onPlaceUnit;
+  final Function(Unit) onRemoveUnit;
 
   const Cell({
     @required this.x,
@@ -17,7 +18,8 @@ class Cell extends StatelessWidget {
     @required this.width,
     @required this.height,
     @required this.battlefield,
-    @required this.onTap,
+    @required this.onPlaceUnit,
+    @required this.onRemoveUnit,
   });
 
   @override
@@ -34,14 +36,20 @@ class Cell extends StatelessWidget {
         ),
       ),
       child: (unit != null)
-          ? RotatedBox(
-              quarterTurns: unit.player.quarterTurns,
-              child: UnitWidget(unit: unit),
+          ? Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () => onRemoveUnit(unit),
+                child: RotatedBox(
+                  quarterTurns: unit.player.quarterTurns,
+                  child: UnitWidget(unit: unit),
+                ),
+              ),
             )
           : Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () => onTap?.call(),
+                onTap: () => onPlaceUnit?.call(),
                 child: Container(),
               ),
             ),
