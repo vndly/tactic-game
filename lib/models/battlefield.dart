@@ -84,10 +84,10 @@ class Battlefield {
     }
 
     for (final Player player in players) {
-      player.commandPoints = lastTurnCp + 1;
+      player.commandPoints += lastTurnCp + 1;
     }
 
-    lastTurnCp = players[0].commandPoints;
+    lastTurnCp++;
   }
 
   Unit unit(int x, int y) {
