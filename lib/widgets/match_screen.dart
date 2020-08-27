@@ -261,7 +261,7 @@ class UnitRow extends StatelessWidget {
       height: height,
       child: UnitWidget(
         unit: Unit.of(player, type),
-        showHealth: false,
+        showStats: false,
         padding: padding,
       ),
     );
