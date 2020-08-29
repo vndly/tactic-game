@@ -9,9 +9,10 @@ class CardsGameApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          body: MatchScreen(
-        battlefield: battlefield(),
-      )),
+        body: MatchScreen(
+          battlefield: battlefield(),
+        ),
+      ),
     );
   }
 

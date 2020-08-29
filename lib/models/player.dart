@@ -19,7 +19,7 @@ class Player {
     @required this.color,
     @required this.commandPoints,
     @required this.health,
-  }) : quarterTurns = (id == 1) ? 0 : 2;
+  }) : quarterTurns = 0; //(id == 1) ? 0 : 2;
 
   void addUnit(Unit unit) {
     units.add(unit);

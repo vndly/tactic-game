@@ -26,28 +26,34 @@ class _MatchScreenState extends State<MatchScreen> {
       child: Container(
         color: Colors.black,
         child: LayoutBuilder(
-          builder: (context, constaints) => Column(
-            children: [
-              CommandCenter(
-                player: widget.battlefield.players[1],
-                height: _commandCenterHeight(constaints),
-                onTap: _onCommandCenterTapped,
+          builder: (context, constaints) => Center(
+            child: Container(
+              width: constaints.maxHeight / 1.77,
+              height: constaints.maxHeight,
+              child: Column(
+                children: [
+                  CommandCenter(
+                    player: widget.battlefield.players[1],
+                    height: _commandCenterHeight(constaints),
+                    onTap: _onCommandCenterTapped,
+                  ),
+                  Expanded(
+                    child: Grid(
+                      battlefield: widget.battlefield,
+                      unitToPlace: unitToPlace,
+                      onPlaceUnit: _onCreateUnit,
+                      onRemoveUnit: _onRemoveUnit,
+                      onShowUnits: _onShowUnits,
+                    ),
+                  ),
+                  CommandCenter(
+                    player: widget.battlefield.players[0],
+                    height: _commandCenterHeight(constaints),
+                    onTap: _onCommandCenterTapped,
+                  ),
+                ],
               ),
-              Expanded(
-                child: Grid(
-                  battlefield: widget.battlefield,
-                  unitToPlace: unitToPlace,
-                  onPlaceUnit: _onCreateUnit,
-                  onRemoveUnit: _onRemoveUnit,
-                  onShowUnits: _onShowUnits,
-                ),
-              ),
-              CommandCenter(
-                player: widget.battlefield.players[0],
-                height: _commandCenterHeight(constaints),
-                onTap: _onCommandCenterTapped,
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -56,7 +62,7 @@ class _MatchScreenState extends State<MatchScreen> {
 
   double _commandCenterHeight(BoxConstraints constaints) =>
       (constaints.maxHeight -
-          ((constaints.maxWidth / widget.battlefield.width) *
+          (((constaints.maxHeight / 1.77) / widget.battlefield.width) *
               widget.battlefield.height)) /
       2;
 
